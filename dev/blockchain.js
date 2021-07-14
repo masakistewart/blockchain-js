@@ -41,7 +41,7 @@ class Blockchain {
   // Will most likely move this later to seperate file depending on convention
   // eslint-disable-next-line class-methods-use-this
   hashBlock(previousBlockHash, currentBlockData, nonce) {
-    const DataAsString = previousBlockHash + nonce.ToString() + JSON.stringify(currentBlockData);
+    const DataAsString = `${previousBlockHash}${nonce}${JSON.stringify(currentBlockData)}`;
     const hash = sha256(DataAsString);
     return hash;
   }
