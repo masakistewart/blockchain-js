@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 const assert = require('assert');
+const { describe } = require('mocha');
 const Blockchain = require('../dev/blockchain');
 // refactor tests in this block with before or beforeEach
 describe('Blockchain', () => {
@@ -39,6 +40,23 @@ describe('Blockchain', () => {
       bitcoin.createNewBlock(4123, '0902BFE34BDDN', 'GNDJNGJEN3342N');
       // create testing for adding multiple transactions then mining a block
       assert.strictEqual(bitcoin.chain[1].transactions.length, 1);
+    });
+  });
+
+  describe('#hashBlock', () => {
+    it('should return a string of 64 chars', () => {
+      const bitcoin = new Blockchain();
+      const previousBlockHash = '0JKDNGBGN324N43N';
+      const currentBlockData = [
+        { amount: 10, sender: '0JKDNGBGN324N43N', recipient: 'NUSFHF223245' },
+        { amount: 10, sender: '321DNGBGN324N43N', recipient: 'NUSFH2LL3245' },
+        { amount: 10, sender: '008DNGBGN324N43N', recipient: 'NUSFHF2NK245' },
+      ];
+      const nonce = 100;
+      const hash1 = bitcoin.hashBlock(previousBlockHash, currentBlockData, nonce);
+      const hash2 = bitcoin.hashBlock(`${previousBlockHash}55`, currentBlockData, nonce);
+      assert.strictEqual(hash1.length, 64);
+      assert.notStrictEqual(hash1, hash2);
     });
   });
 });
