@@ -3,6 +3,7 @@ const assert = require('assert');
 const { describe } = require('mocha');
 const Blockchain = require('../dev/blockchain');
 // refactor tests in this block with before or beforeEach
+// remember happy path sad path
 describe('Blockchain', () => {
   describe('#createNewBlock', () => {
     it('should add a new blocks to the chain', () => {
@@ -57,6 +58,21 @@ describe('Blockchain', () => {
       const hash2 = bitcoin.hashBlock(`${previousBlockHash}55`, currentBlockData, nonce);
       assert.strictEqual(hash1.length, 64);
       assert.notStrictEqual(hash1, hash2);
+    });
+  });
+
+  describe('#proofOfWork', () => {
+    it('should return same nonce', () => {
+      const bitcoin = new Blockchain();
+      const previousBlockHash = '0JKDNGBGN324N43N';
+      const currentBlockData = [
+        { amount: 10, sender: '0JKDNGBGN324N43N', recipient: 'NUSFHF223245' },
+        { amount: 10, sender: '321DNGBGN324N43N', recipient: 'NUSFH2LL3245' },
+        { amount: 10, sender: '008DNGBGN324N43N', recipient: 'NUSFHF2NK245' },
+      ];
+
+      assert.strictEqual(bitcoin.proofOfWork(previousBlockHash, currentBlockData), 35757);
+      assert.strictEqual(bitcoin.hashBlock(previousBlockHash, currentBlockData, 35757), '0000bfad12b78a9ba7f520a7cd6ecb5a7a1888f86786431dbce27a2ba5d91f57');
     });
   });
 });
