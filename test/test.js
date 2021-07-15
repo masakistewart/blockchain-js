@@ -11,7 +11,7 @@ describe('Blockchain', () => {
       bitcoin.createNewBlock(1187, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
       bitcoin.createNewBlock(3245, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
       bitcoin.createNewBlock(1456, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
-      assert.strictEqual(bitcoin.chain.length, 3);
+      assert.strictEqual(bitcoin.chain.length, 4);
     });
   });
 
@@ -20,7 +20,7 @@ describe('Blockchain', () => {
       const bitcoin = new Blockchain();
       bitcoin.createNewBlock(1187, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
       bitcoin.createNewBlock(1456, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
-      assert.strictEqual(bitcoin.getLastBlock().index, 2);
+      assert.strictEqual(bitcoin.getLastBlock().index, 3);
     });
   });
 
@@ -40,7 +40,7 @@ describe('Blockchain', () => {
       bitcoin.createNewTransaction(100, '908NSDF8W8RWER', 'NUSFHF223245');
       bitcoin.createNewBlock(4123, '0902BFE34BDDN', 'GNDJNGJEN3342N');
       // create testing for adding multiple transactions then mining a block
-      assert.strictEqual(bitcoin.chain[1].transactions.length, 1);
+      assert.strictEqual(bitcoin.chain[2].transactions.length, 1);
     });
   });
 
