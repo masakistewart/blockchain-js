@@ -5,9 +5,11 @@ const Blockchain = require('../dev/blockchain');
 // refactor tests in this block with before or beforeEach
 // remember happy path sad path
 describe('Blockchain', () => {
+  beforeEach('setup', () => {
+    bitcoin = new Blockchain();
+  });
   describe('#createNewBlock', () => {
     it('should add a new blocks to the chain', () => {
-      const bitcoin = new Blockchain();
       bitcoin.createNewBlock(1187, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
       bitcoin.createNewBlock(3245, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
       bitcoin.createNewBlock(1456, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
@@ -17,7 +19,6 @@ describe('Blockchain', () => {
 
   describe('#getlastblock', () => {
     it('should return the last index of a block', () => {
-      const bitcoin = new Blockchain();
       bitcoin.createNewBlock(1187, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
       bitcoin.createNewBlock(1456, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
       assert.strictEqual(bitcoin.getLastBlock().index, 3);
@@ -26,7 +27,6 @@ describe('Blockchain', () => {
 
   describe('#createNewTransaction', () => {
     it('should create a new transaction', () => {
-      const bitcoin = new Blockchain();
       bitcoin.createNewBlock(1187, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
       bitcoin.createNewTransaction(100, '908NSDF8W8RWER', 'NUSFHF223245');
 
@@ -35,7 +35,6 @@ describe('Blockchain', () => {
       assert.strictEqual(bitcoin.pendingTransactions[0].recipient, 'NUSFHF223245');
     });
     it('should have transactions on the last block in the chain', () => {
-      const bitcoin = new Blockchain();
       bitcoin.createNewBlock(1187, '0JKDNGBGN324N43N', 'NBSFJ232NI23');
       bitcoin.createNewTransaction(100, '908NSDF8W8RWER', 'NUSFHF223245');
       bitcoin.createNewBlock(4123, '0902BFE34BDDN', 'GNDJNGJEN3342N');
@@ -46,7 +45,6 @@ describe('Blockchain', () => {
 
   describe('#hashBlock', () => {
     it('should return a string of 64 chars', () => {
-      const bitcoin = new Blockchain();
       const previousBlockHash = '0JKDNGBGN324N43N';
       const currentBlockData = [
         { amount: 10, sender: '0JKDNGBGN324N43N', recipient: 'NUSFHF223245' },
@@ -63,7 +61,6 @@ describe('Blockchain', () => {
 
   describe('#proofOfWork', () => {
     it('should return same nonce', () => {
-      const bitcoin = new Blockchain();
       const previousBlockHash = '0JKDNGBGN324N43N';
       const currentBlockData = [
         { amount: 10, sender: '0JKDNGBGN324N43N', recipient: 'NUSFHF223245' },
