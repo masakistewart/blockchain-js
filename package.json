@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "nodemon dev/server.js"
+    "start": "nodemon --watch dev -e js"
   },
   "author": "masakistewart",
   "license": "ISC",
