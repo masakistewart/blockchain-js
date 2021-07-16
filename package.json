@@ -2,7 +2,7 @@
   "name": "blockchain",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dev/server.js",
   "scripts": {
     "test": "mocha",
     "start": "nodemon --watch dev -e js"
